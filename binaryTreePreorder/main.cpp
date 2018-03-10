@@ -17,11 +17,10 @@ public:
     void binary_insert();
     void preorder_recursive_wrapper();
     void preorder_recursive(nodeptr root);
-
 };
 
 binary_tree::binary_tree(){
- root =NULL;
+ root = NULL;
 }
 
 void binary_tree::binary_insert(){
@@ -39,32 +38,26 @@ void binary_tree::binary_insert(){
     root->right->right=NULL;
 }
 
-void binary_tree::preorder_recursive_wrapper(){
-    if (root==NULL)
-    {
-        cout<<"tree is empty";
+void binary_tree::preorder_recursive(){
+    if (root == NULL)
         return;
-    }
-    else
-    {
-       nodeptr temp=root;
-       preorder_recursive(temp);
-    }
+    nodeptr temp = root;
+    preorder_recursive(temp);
 }
 
 void binary_tree::preorder_recursive(nodeptr root){
-    if (root!=NULL)
-    {
-        cout<<root->value;
-        preorder_recursive(root->left);
-        preorder_recursive(root->right);
-    }
+    if(root == NULL)
+        return;
+    
+    cout<<root->value;
+    preorder_recursive(root->left);
+    preorder_recursive(root->right);
 }
 
 int main()
 {
-    binary_tree b1;
-    b1.binary_insert();
-    b1.preorder_recursive_wrapper();
+    binary_tree tree;
+    tree.binary_insert();
+    tree.preorder_recursive();
     return 0;
 }
