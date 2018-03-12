@@ -85,13 +85,13 @@ void bst::evenLevelSum_wrapper(int &sum){
         cout<<evenLevelSum(root,level,sum);
 }
 
-int bst::evenLevelSum(nodeptr root,int level,int &sum){
-    if(root==NULL)
+int bst::evenLevelSum(nodeptr root,int level,int &sum) {
+    if(root == NULL)
         return sum;
-    if(level%2==0)
-        sum=sum+root->data;
-    evenLevelSum(root->left,level+1,sum);
-    evenLevelSum(root->right,level+1,sum);
+    if(level%2 == 0)
+        sum += root->data;
+    evenLevelSum(root->left, level + 1, sum);
+    evenLevelSum(root->right, level + 1, sum);
 }
 
 
