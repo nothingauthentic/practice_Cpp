@@ -61,22 +61,18 @@ void bst::insertnode(nodeptr curr,nodeptr temp,int ele){
 
 }
 
-int bst::heightofnode(nodeptr temp){
-    if (! temp)
+int bst::heightOfNode(nodeptr temp){
+    if (temp == NULL)
         return 0;
     else
-    {int hl=heightofnode(temp->left);
-    int hr=heightofnode(temp->right);
-    return 1+ ((hl>hr)?hl:hr) ;
-    }
+        return 1 + max(heightOfNode(temp->left), heightOfNode(temp->right));
 }
 
 int bst::evenLevelSum(){
-    if(root==NULL)
+    if(root == NULL)
         return 0;
     int sum=0;
-    if (heightofnode(root)==0)
-    {
+    if (heightofnode(root)==0){
         sum=root->data;
         return sum;
     }
