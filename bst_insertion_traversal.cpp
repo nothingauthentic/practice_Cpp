@@ -2,9 +2,9 @@
 
 using namespace std;
 
-class bst{
+class bst {
 private:
-    class node{
+    class node {
     public:
         int data;
         node* left;
@@ -15,71 +15,68 @@ private:
 public:
     bst();
     void insertnode_wrapper(int ele);
-    void insertnode(nodeptr root,nodeptr temp,int ele);
-
     void traverse_preorder_wrapper();
     void traverse_preorder(nodeptr root);
+    
+private:
+    void insertnode(nodeptr root, nodeptr temp, int ele);
 };
 
-bst::bst(){
-    root=NULL;
+bst::bst() {
+    root = NULL;
 }
 
-void bst::insertnode_wrapper(int ele){
-    nodeptr temp=new node();
-    temp->data=ele;
-    temp->left=NULL;
-    temp->right=NULL;
+void bst::insertnode_wrapper(int ele) {
+    nodeptr temp = new node();
+    temp->data = ele;
+    temp->left = NULL;
+    temp->right = NULL;
 
-    if (root==NULL)
-        root=temp;
-    else{
-        nodeptr curr=root;
-        insertnode(curr,temp,ele);
+    if (root == NULL)
+        root = temp;
+    else {
+        nodeptr curr = root;
+        insertnode(curr, temp, ele);
     }
 }
 
-void bst::insertnode(nodeptr curr,nodeptr temp,int ele){
-    nodeptr temp2;
-    while(curr!=NULL)
-    {   temp2=curr;
-        if(ele<curr->data)
-        {
-            curr=curr->left;
-        }
+// Also I would suggest check recursive implementation, that will be easy and fast to code
+void bst::insertnode(nodeptr root, nodeptr newNode, int ele) {
+    nodeptr parent;
+    while(curr != NULL) {
+        // I guess you want to save parent
+        parent = root;
+        if(newNode->data < root->data)
+            root = root->left;
         else
-            curr=curr->right;
+            root = root->right;
     }
-    if(ele>temp2->data)
-    {
-        temp2->right=temp;
-    }
+    if(temp->data > parent->data)
+        parent->right = newNode;
     else
-        temp2->left=temp;
+        parent->left = newNode;
 }
 
-void bst::traverse_preorder_wrapper()
-{
-    if (root==NULL)
-    {
+void bst::traverse_preorder_wrapper() {
+    if (root == NULL) {
         cout<<endl<<"Tree is empty";
         return;
     }
-    nodeptr curr=root;
+    nodeptr curr = root;
     traverse_preorder(curr);
 }
 
-void bst::traverse_preorder(nodeptr root){
-    if(root==NULL)
+void bst::traverse_preorder(nodeptr root) {
+    if(root == NULL)
         return;
-    else
-    {cout<<root->data<<" ";
-    traverse_preorder(root->left);
-    traverse_preorder(root->right);}
+    else {
+        cout<<root->data<<" ";
+        traverse_preorder(root->left);
+        traverse_preorder(root->right);
+    }
 }
 
-int main()
-{
+int main() {
     bst b1;
     b1.insertnode_wrapper(9);
     b1.insertnode_wrapper(4);
