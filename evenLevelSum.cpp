@@ -1,5 +1,4 @@
 #include <iostream>
-#include <queue>
 
 using namespace std;
 
@@ -17,10 +16,11 @@ public:
     bst();
     void insertnode_wrapper(int ele);
     void insertnode(nodeptr root,nodeptr temp,int ele);
-    int traverse_preorderForSum(nodeptr root,int sum);
-    void levelorder();
-    int heightofnode(nodeptr temp);
-    int evenLevelSum();
+
+    void traverse_preorder_wrapper();
+    void traverse_preorder(nodeptr root);
+    void evenLevelSum_wrapper(int &sum);
+    int evenLevelSum(nodeptr root,int level,int &sum);
 };
 
 bst::bst(){
@@ -58,79 +58,56 @@ void bst::insertnode(nodeptr curr,nodeptr temp,int ele){
     }
     else
         temp2->left=temp;
-
 }
 
-int bst::heightofnode(nodeptr temp){
-    if (! temp)
-        return 0;
-    else
-    {int hl=heightofnode(temp->left);
-    int hr=heightofnode(temp->right);
-    return 1+ ((hl>hr)?hl:hr) ;
-    }
-}
-
-int bst::evenLevelSum(){
-    if(root==NULL)
-        return 0;
-    int sum=0;
-    if (heightofnode(root)==0)
-    {
-        sum=root->data;
-        return sum;
-    }
-    nodeptr temp=root;
-    sum=traverse_preorderForSum(temp,sum);
-    return sum;
-}
-
-int bst::traverse_preorderForSum(nodeptr root,int sum){
-    if(root==NULL)
-        return sum;
-    else
-    {if(heightofnode(root)%2==0)
-        {
-
-            sum=sum+ root->data;
-        }
-    traverse_preorderForSum(root->left,sum);
-    traverse_preorderForSum(root->right,sum);}
-}
-
-void bst::levelorder(){
+void bst::traverse_preorder_wrapper()
+{
     if (root==NULL)
     {
-        cout<<"Tree is empty";
+        cout<<endl<<"Tree is empty";
         return;
     }
-    queue<nodeptr> s;
-    s.push(root);
-    while(!s.empty())
-    {
-        nodeptr curr=s.front();
-        cout<<curr->data<<" ";
-        if (curr->left)
-            {s.push(curr->left);}
-        if (curr->right)
-            {s.push(curr->right);}
-        s.pop();
-    }
+    nodeptr curr=root;
+    traverse_preorder(curr);
 }
+
+void bst::traverse_preorder(nodeptr root){
+    if(root==NULL)
+        return;
+    else
+    {cout<<root->data<<" ";
+    traverse_preorder(root->left);
+    traverse_preorder(root->right);}
+}
+
+void bst::evenLevelSum_wrapper(int &sum){
+        int level=0;
+        cout<<evenLevelSum(root,level,sum);
+}
+
+int bst::evenLevelSum(nodeptr root,int level,int &sum){
+    if(root==NULL)
+        return sum;
+    if(level%2==0)
+        sum=sum+root->data;
+    evenLevelSum(root->left,level+1,sum);
+    evenLevelSum(root->right,level+1,sum);
+}
+
 
 int main()
 {
     bst b1;
-
     b1.insertnode_wrapper(9);
     b1.insertnode_wrapper(4);
     b1.insertnode_wrapper(6);
     b1.insertnode_wrapper(12);
     b1.insertnode_wrapper(10);
     b1.insertnode_wrapper(2);
-    cout<<endl<<"level order traversal   :";
-    b1.levelorder();
-    cout<<endl<<"Even level Sum  :";
-    cout<<b1.evenLevelSum();
+    cout<<"Preorder Traversal  :  ";
+    b1.traverse_preorder_wrapper();
+    int sum=0;
+    cout<<endl<<"Even level Sum  ";
+    b1.evenLevelSum_wrapper(sum);
     return 0;
 }
