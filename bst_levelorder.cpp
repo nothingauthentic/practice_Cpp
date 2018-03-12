@@ -27,6 +27,9 @@ bst::bst(){
     root=NULL;
 }
 
+// THIS IS NOT CORRECT, HAVE A DIFFERENT CLASS AND ALL COMMON FUNCTION SHOULD BE THERE
+// YOU CAN THEN REUSE IT IN DIFFERENT FUNCTION, THAT WAY IT WILL BE EASY FOR YOU TO 
+// WRITE ONLY NEW CODE
 void bst::insertnode_wrapper(int ele){
     nodeptr temp=new node();
     temp->data=ele;
@@ -81,29 +84,23 @@ void bst::traverse_preorder(nodeptr root){
 }
 
 void bst::levelorder(){
-    if (root==NULL)
-    {
+    if (root == NULL) {
         cout<<"Tree is empty";
         return;
     }
     queue<nodeptr> s;
     s.push(root);
-    while(!s.empty())
-    {
-        nodeptr curr=s.front();
+    while(!s.empty()) {
+        nodeptr curr = s.pop();
         cout<<curr->data<<" ";
         if (curr->left)
-            {s.push(curr->left);}
+            s.push(curr->left);
         if (curr->right)
-            {s.push(curr->right);}
-        s.pop();
-
-
+            s.push(curr->right);
     }
 }
 
-int main()
-{
+int main() {
     bst b1;
     b1.insertnode_wrapper(9);
     b1.insertnode_wrapper(4);
