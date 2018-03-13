@@ -31,6 +31,21 @@ public:
     void sumEachLevel();//find sum of nodes at each level
 
     void altLevel();//print levels right to left and left to right alternatively
+
+    void evenLevelSum_wrapper(int &sum); // find sum of all nodes at even levels
+    int evenLevelSum(nodeptr root,int level,int &sum);
+
+    void oddLevelSum_wrapper(int &sum); // find sum of all nodes at odd levels
+    int oddLevelSum(nodeptr root,int level,int &sum);
+
+    void replaceBySum_wrapper();
+    int replaceBySum(nodeptr root);
+
+    int validateBST_wrapper();
+    bool validateBST(nodeptr root);
+
+    void searchBST_wrapper(int key);
+    int searchBST(nodeptr node,int key);
 };
 
 bst::bst(){

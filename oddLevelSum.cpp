@@ -1,18 +1,18 @@
 #include "bst.h"
 #include <iostream>
 
-void bst::evenLevelSum_wrapper(int &sum){
+void bst::oddLevelSum_wrapper(int &sum){
         int level=0;
-        cout<<evenLevelSum(root,level,sum);
+        cout<<oddLevelSum(root,level,sum);
 }
 
-int bst::evenLevelSum(nodeptr root,int level,int &sum){
+int bst::oddLevelSum(nodeptr root,int level,int &sum){
     if(root==NULL)
         return sum;
-    if(level%2==0)
+    if(level%2 != 0)
         sum=sum+root->data;
-    evenLevelSum(root->left,level+1,sum);
-    evenLevelSum(root->right,level+1,sum);
+    oddLevelSum(root->left,level+1,sum);
+    oddLevelSum(root->right,level+1,sum);
 }
 
 
@@ -28,7 +28,7 @@ int main()
     cout<<"Preorder Traversal  :  ";
     b1.traverse_preorder_wrapper();
     int sum=0;
-    cout<<endl<<"Even level Sum  ";
-    b1.evenLevelSum_wrapper(sum);
+    cout<<endl<<"Odd level Sum  ";
+    b1.oddLevelSum_wrapper(sum);
     return 0;
 }
