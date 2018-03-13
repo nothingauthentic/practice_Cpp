@@ -1,103 +1,25 @@
+#include "bst.h"
 #include <iostream>
 #include <stack>
 #include <queue>
 
 using namespace std;
 
-class bst{
-private:
-    class node{
-    public:
-        int data;
-        node* left;
-        node* right;
-    };
-    typedef node* nodeptr;
-    nodeptr root;
-public:
-    bst();
-    void insertnode_wrapper(int ele);
-    void insertnode(nodeptr root,nodeptr temp,int ele);
-    void traverse_preorder_wrapper();
-    void traverse_preorder(nodeptr root);
-    void altLevel();
-};
-
-bst::bst(){
-    root=NULL;
-}
-
-void bst::insertnode_wrapper(int ele){
-    nodeptr temp=new node();
-    temp->data=ele;
-    temp->left=NULL;
-    temp->right=NULL;
-
-    if (root==NULL)
-        root=temp;
-    else{
-        nodeptr curr=root;
-        insertnode(curr,temp,ele);
-    }
-}
-
-void bst::insertnode(nodeptr curr,nodeptr temp,int ele){
-    nodeptr temp2;
-    while(curr!=NULL)
-    {   temp2=curr;
-        if(ele<curr->data)
-        {
-            curr=curr->left;
-        }
-        else
-            curr=curr->right;
-    }
-    if(ele>temp2->data)
-    {
-        temp2->right=temp;
-    }
-    else
-        temp2->left=temp;
-}
-
-void bst::traverse_preorder_wrapper()
-{
-    if (root==NULL)
-    {
-        cout<<endl<<"Tree is empty";
-        return;
-    }
-    nodeptr curr=root;
-    traverse_preorder(curr);
-}
-
-void bst::traverse_preorder(nodeptr root){
-    if(root==NULL)
-        return;
-    else
-    {cout<<root->data<<" ";
-    traverse_preorder(root->left);
-    traverse_preorder(root->right);}
-}
-
 void bst::altLevel(){
     if (root==NULL)
-    {
-        cout<<"Tree is empty";
-        return;
-    }
+    {cout<<"Tree is empty";
+        return;}
     queue<nodeptr> q;
     stack<nodeptr> s;
     q.push(root);
-    int level=0;
-    int qsize=0;
+    int level = 0;
+    int qsize = 0;
 
     while(!q.empty())
     { qsize=q.size();
       while(qsize != 0)
       { if (level % 2 == 0)
             {
-                qsize--;
                 nodeptr curr=q.front();
                 cout<<curr->data<<" ";
                 if (curr->left)
@@ -105,7 +27,7 @@ void bst::altLevel(){
                 if (curr->right)
                     {q.push(curr->right);}
                 q.pop();
-                level++;
+                qsize--;
             }
         else
             {
@@ -127,9 +49,9 @@ void bst::altLevel(){
                     cout<<curr->data<<" ";
                     s.pop();
                 }
-                level++;
             }
       }
+      level++;
     }
 }
 

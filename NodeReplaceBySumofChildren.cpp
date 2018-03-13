@@ -97,6 +97,7 @@ int bst::replaceBySum(nodeptr root){
        return root->data;}
 }
 
+
 int main()
 {
     bst b1;
