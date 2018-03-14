@@ -7,6 +7,18 @@ int bst::validateBST_wrapper(){
     return validateBST(root);
 }
 
+int bst::leftMax(nodeptr root) {
+    
+}
+
+bool bst::validateBST(nodeptr root) {
+    int l = leftMax(root->left);
+    int r = rightMin(root->right);
+    
+    bool b = compare(root->data, l, r);    
+    return b && validateBST(root->left) && validateBST(root->right);
+}
+
 bool bst::validateBST(nodeptr root){
     if (root == NULL)
         return true;
