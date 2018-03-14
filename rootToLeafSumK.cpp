@@ -12,7 +12,23 @@ void bst::rootToLeafSumK_wrapper(int k){
         cout<<"FOUND";
 }
 
-int bst::rootToLeafSumK(nodeptr root, int currsum, int k){
+int bst::leafNode(nodeptr root) {
+    if(root == NULL)
+        return 0;
+    if(root->left == NULL & root ->right == NULL) 
+        return 1;
+    int l = leafNode(root->left);
+    int r = leafNode(root->right);
+    return l + r;
+}
+
+int bst::rootToLeafSumK(nodeptr root, iint k){
+    
+    l = rootToLeafSumK(root->left, k - root->data);
+    r = rootToLeafSumK(root->right, k - root->data);
+    
+   return l || r
+    
     if (currsum > k)
         return 0;
     if (root == NULL && currsum == k)
