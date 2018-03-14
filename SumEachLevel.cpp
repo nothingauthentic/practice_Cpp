@@ -9,21 +9,21 @@ void bst::sumEachLevel(){
         return;
     queue<nodeptr> q;
     q.push(root);
-    int level=0;
+    int level = 0;
     while(!q.empty()){
-        int qsize= q.size();
-        int suml=0;
-        while(qsize != 0){
+        int qsize = q.size();
+        int sum = 0;
+        while(qsize != 0) {
             qsize--;
-            nodeptr curr=q.front();
-            suml = suml + curr->data;
+            nodeptr curr = q.front();
+            sum = sum + curr->data;
             if(curr->left)
                 q.push(curr->left);
             if(curr->right)
                 q.push(curr->right);
             q.pop();
         }
-        cout<<endl<<"sum at level "<<level<<" is "<<suml;
+        cout<<endl<<"sum at level "<<level<<" is "<<sum;
         level++;
     }
 }
