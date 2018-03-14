@@ -6,21 +6,26 @@
 using namespace std;
 
 void bst::altLevel(){
-    if (root==NULL)
-    {cout<<"Tree is empty";
-        return;}
+    if (root == NULL) {
+        cout<<"Tree is empty";
+        return;
+    }
+
     queue<nodeptr> q;
     stack<nodeptr> s;
     q.push(root);
     int level = 0;
     int qsize = 0;
+    
+    while(!s1.empty() || !s2.empty()) {
+        
+    }
 
-    while(!q.empty())
-    { qsize=q.size();
-      while(qsize != 0)
-      { if (level % 2 == 0)
-            {
-                nodeptr curr=q.front();
+    while(!q.empty()) { 
+        qsize=q.size();
+        while(qsize != 0) {
+          if (level % 2 == 0) {
+                nodeptr curr = q.front();
                 cout<<curr->data<<" ";
                 if (curr->left)
                     {q.push(curr->left);}
@@ -28,12 +33,11 @@ void bst::altLevel(){
                     {q.push(curr->right);}
                 q.pop();
                 qsize--;
-            }
-        else
-            {
-                int qsize2=qsize;
-                for(int i=1;i<=qsize2;i++)
-                {
+          }
+          else
+          {
+                int qsize2 = qsize;
+                while(qsize2 > 0) {
                     s.push(q.front());
                     nodeptr curr = q.front();
                     if (curr->left)
@@ -41,15 +45,15 @@ void bst::altLevel(){
                     if (curr->right)
                         {q.push(curr->right);}
                     q.pop();
+                    qsize2--
                     qsize--;
                 }
-                while(! s.empty())
-                {
+                while(!s.empty()) {
                     nodeptr curr= s.top();
                     cout<<curr->data<<" ";
                     s.pop();
                 }
-            }
+          }
       }
       level++;
     }
