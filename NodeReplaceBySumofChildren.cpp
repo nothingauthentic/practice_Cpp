@@ -79,22 +79,28 @@ void bst::traverse_preorder(nodeptr root){
     traverse_preorder(root->right);}
 }
 
+void bst::traverse_postorder(nodeptr root){
+    if(root == NULL)
+        return;
+
+    traverse_postorder(root->left);
+    traverse_postorder(root->right);
+    cout<<root->data<<" ";
+}
+
 void bst::replaceBySum_wrapper(){
     replaceBySum(root);
 }
 
 int bst::replaceBySum(nodeptr root){
-    if (!(root->left) && !(root->right))
-        return root->data;
-    else if (!root->left)
-        {root->data = root->data + replaceBySum(root->right);
-         return root->data;}
-    else if (!root->right)
-        {root->data = root->data + replaceBySum(root->left);
-          return root->data;}
-    else
-    {root->data = root->data + replaceBySum(root->left) + replaceBySum(root->right);
-       return root->data;}
+    if(root == NULL)
+        return 0;
+    
+    int currentData = root->data;
+    int l = replaceBySum(root->left);
+    int r = replaceBySum(root->right);
+    root->data = l + r;
+    return root->data + currentData;
 }
 
 
