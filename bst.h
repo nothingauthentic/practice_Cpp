@@ -49,6 +49,9 @@ public:
 
     void pathSumK_wrapper(int k);
     int pathSumK(nodeptr root, int currsum, int k);
+
+    void rootToLeafSumK_wrapper(int k);
+    int rootToLeafSumK(nodeptr root, int currsum, int k);
 };
 
 bst::bst(){
@@ -134,3 +137,4 @@ void bst::traverse_inorder(nodeptr root){
 }
 
 #endif
+
